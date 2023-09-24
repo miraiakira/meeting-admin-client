@@ -107,6 +107,40 @@ export async function updatePassword(data: UpdatePassword) {
   return await axiosInstance.post('/user/admin/update_password', data);
 }
 
+export async function meetingRoomList(
+  name: string,
+  capacity: number,
+  equipment: string,
+  pageNo: number,
+  pageSize: number
+) {
+  return await axiosInstance.get('/meeting-room/list', {
+    params: {
+      name,
+      capacity,
+      equipment,
+      pageNo,
+      pageSize,
+    },
+  });
+}
+
+export async function deleteMeetingRoom(id: number) {
+  return await axiosInstance.delete('/meeting-room/' + id);
+}
+
+export async function createMeetingRoom(meetingRoom: CreateMeetingRoom) {
+  return await axiosInstance.post('/meeting-room/create', meetingRoom);
+}
+
+export async function updateMeetingRoom(meetingRoom: UpdateMeetingRoom) {
+  return await axiosInstance.put('/meeting-room/update', meetingRoom);
+}
+
+export async function findMeetingRoom(id: number) {
+  return await axiosInstance.get('/meeting-room/' + id);
+}
+
 export interface UserInfo {
   username: string;
   headPic: string;
@@ -121,4 +155,21 @@ export interface UpdatePassword {
   password: string;
   confirmPassword: string;
   username?: string;
+}
+
+export interface CreateMeetingRoom {
+  name: string;
+  capacity: number;
+  location: string;
+  equipment: string;
+  description: string;
+}
+
+export interface UpdateMeetingRoom {
+  id: number;
+  name: string;
+  capacity: number;
+  location: string;
+  equipment: string;
+  description: string;
 }
